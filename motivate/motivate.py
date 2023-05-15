@@ -55,16 +55,13 @@ def quote():
         if "quote" in quotes["data"][ran_no]:
             quote = quotes["data"][ran_no]["quote"]
             author = quotes["data"][ran_no]["author"]
-            if os.name == "nt" or args.nocolor:
-                quote = "\"" + quote + "\""
-                author = "--" + author
-                white_code = ""
-            else:
-                quote = "\033[1;36m" + "\"" + quote + "\"" + "\033[1;m"
-                author = "\033[1;35m" + "--" + author + "\033[1;m"
-                white_code = "\x1b[0m"
-            output = quote + "\n\t\t" + author
-            print(output + white_code)
+            blue = "\033[1;36m"
+            blue_end = "\033[1;m"
+            purple = "\033[1;35m" 
+            purple_end = "\033[1;m"
+            white_code = "\x1b[0m"
+            columns = int(os.popen('tput cols').read())
+            print(blue + quote.center(columns) + blue_end + "\n" + purple + author.center(columns) + purple_end +  white_code)
         else:
             print ("---------------Debug info begins:--------------")
             print("This is a message indicating an error in your json database:")
